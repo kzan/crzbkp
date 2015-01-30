@@ -20,11 +20,11 @@ echo "Dev/deploy mode."
 PIP=stuff
 fi
 
-./venv/bin/pip install --upgrade pip
-./venv/bin/pip install pep8
-./venv/bin/pip install pylint
-./venv/bin/pip install coverage
-./venv/bin/pip install nose
+./venv/bin/pip install -q --upgrade pip
+./venv/bin/pip install -q pep8
+./venv/bin/pip install -q pylint
+./venv/bin/pip install -q coverage
+./venv/bin/pip install -q nose
 
 $1/jobs/python-2.7.9/bin/virtualenv --relocatable venv
 
@@ -36,3 +36,5 @@ echo "pylint complete"
 #==================================
 venv/bin/coverage run --include 'project/*.py' project/tests.py --with-xunit --xunit-file=reports/tests.xml --where=project
 venv/bin/coverage xml -o reports/coverage.xml
+#==================================
+rm -rf venv
