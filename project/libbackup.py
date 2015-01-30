@@ -6,15 +6,18 @@ import os
 import shutil
 import tarfile
 
+
 class BackupModel:
-  def __init__(self,backup_time,config_file='/var/kzan.backup/config_backup.json',base_path='/var/kzan.backup'):
-    self.cfile=config_file
-    self.loglavel=1 #May be this statement set in init param?
-    self.backup_time=backup_time
-    self.LOGFILE=(open('kzanbackup.log','a'),sys.stdout)[self.loglavel] #This var must read from config file. If no in file, then write to stdout
+  def __init__(self, backup_time, config_file='/var/kzan.backup/config_backup.json', base_path='/var/kzan.backup'):
+    self.cfile = config_file
+    self.loglavel = 1 #May be this statement set in init param?
+    self.backup_time = backup_time
+    self.LOGFILE = (open('kzanbackup.log','a'),sys.stdout)[self.loglavel] #This var must read from config file. If no in file, then write to stdout
     self.bt_path = base_path + '/' + backup_time + '/'
     self.arch_name = self.bt_path[:-1] + ".tar.gz"
-    self.saved_day = 5; self.saved_day -= 1; self.saved_day *= 3600*24 #Correct date and Convert seconds to day
+    self.saved_day = 5 
+    self.saved_day -= 1 
+    self.saved_day *= 3600*24 #Correct date and Convert seconds to day
     self.know_methods = {'file':self.backup_file,
                          'mysql':self.backup_mysql}
 
@@ -94,7 +97,7 @@ class BackupModel:
     return 1
 
 
-if __name__ == ‘__main__’:
+if __name__ == '__main__':
     import time
     md = BackupModel(time.strftime('%Y.%m.%d_%H:%M',time.localtime()))
 
